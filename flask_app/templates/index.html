@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rat King</title>
+</head>
+<body>
+    <div class="container">
+        <div class="pointTracker"><span id="pointValue">0</span> <span id="pointName"></span></div>
+        <div class="ratTracker"><span id="ratTotal">1</span> Rats</div>
+        <button class="btnGetPoint" onclick = "game.getPoint()">Encourage</button>
+        <button id="buyNest">Buy a nest <span id="nestCost"></span></button>
+        <button id="buyCage">Buy a cage <span id="cageCost"></span></button>
+
+        <div id="nestCount"></div>
+        <div id="population"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
