@@ -18,12 +18,24 @@ var data = {
     grandHalls: 0,
 
     upgrades: [],
-    achievements: [],
 
     clickBase: 3, 
     clickMod: 0,
     percentOnClick: 0,
 }
+
+var mods = {
+    clickBase: 3, 
+    clickMod: 0,
+    percentOnClick: 0,
+
+    nestValue: 5,
+    cageValue: 100,
+    hutchValue: 0,
+    bedroomValue: 0,
+    grandHallValue: 0,
+}
+
 
 pointName.innerText = data.pointsName
 
@@ -32,15 +44,14 @@ var game = {
 
 // Click calcs
     getPoint() {
-        data.points += data.clickValue
-        data.clickPointsTotal += data.clickValue
-        clickCount++
+        data.points += clickValue
+        data.clickPointsTotal += clickValue
+        data.clickCount++
         game.updateDisplay()
     },
 
-
     updateClick() {
-        clickValue = data.clickBase * (1 + data.clickMod) + (data.rats * data.percentOnClick)
+        clickValue = mods.clickBase * (1 + mods.clickMod) + (data.rats * mods.percentOnClick)
     },
 
 
@@ -77,7 +88,7 @@ var game = {
 
 
     getPopulation(){
-        data.popLimit = data.cages * 100 + data.nests * 5
+        data.popLimit = data.cages * mods.cageValue + data.nests * mods.nestValue
     },
 
 
@@ -98,8 +109,6 @@ var game = {
     updateDisplay() {
         pointValue.innerText = Math.floor(data.points)
         ratTotal.innerText = Math.floor(data.rats)
-        nestCount.innerText = data.nests
-        population.innerText = data.popLimit
         nestCost.innerText = game.getNestCost()
         cageCost.innerText = game.getCageCost()
     },
@@ -116,6 +125,7 @@ var game = {
     },
     load(savename = 'save') {
         Object.assign(data, JSON.parse(localStorage.getItem(savename) || '{}'))
+        game.updateClick()
         game.updateDisplay()
     },
     clearSave(savename = 'save') {
@@ -125,11 +135,8 @@ var game = {
     },
 }
 
-game.load()
-game.start()
-
-
 var upgrades = {
+// click upgrades
     1: {
         name: 'Friend of the small',
         requires: data.clickCount == 10,
@@ -154,8 +161,32 @@ var upgrades = {
     4: {
         name: 'General',
         requires: data.clickPointsTotal == 100000,
-        cost: 10000,
+        cost: 500000,
         description: 'You gain 100% more ' + data.pointsName + ' per click', 
         effect: () => data.clickMod + 1
     },
+
+// building upgrades
+    101: {
+        name: 'Scrap organization',
+        requires: data.nests == 10,
+        cost: 1000,
+        description: 'Your rats create more efficient nests. They hold 3 more rats, each.', 
+        effect: () => mods.nestValue += 3
+    },
+
+    102: {
+        name: 'Larger nests',
+        requires: data.nests == 50 && data.upgrades.includes(101),
+        cost: 1000000,
+        description: 'Your rats create larger nests. They twice as many rats, each.', 
+        effect: () => mods.nestValue * 2
+    },
+
 }
+
+
+
+game.load()
+game.start()
+

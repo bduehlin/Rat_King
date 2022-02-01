@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#container {
+    width: 1000px; 
+    height: 600px;
+    border: 3px solid black;
+    margin: auto;
+    display: flex;
+}
+
+
+/* Center Section */
+
+#main {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: slategrey;
+}
+
+.btnGetPoint {
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    transition: background-color 1s, color 1s;
+}
+
+.btnGetPoint:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+/* Right Section */
+
+#buy {
+    width: 300px;
+    border-left: slategrey 3px solid;
+    background-color: slategrey;
+}
+
+#buildings {
+    display: flex;
+    flex-direction: column;
+}
+
+.buildingBuy {
+    height: 60px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0%;
+    border: slategrey 3px solid;
+    background-color: forestgreen;
+    color: ghostwhite;
+    border-left: 0;
+}
+
+.buildingBuy:hover {
+    cursor: pointer;
+}
+
+/* Tabs section */
+
+#tabs {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+
+.circleButton {
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    margin-bottom: 0;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.circleButton:hover {
+    cursor: pointer;
+}
