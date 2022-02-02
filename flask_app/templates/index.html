@@ -10,13 +10,42 @@
 <body>
     <div id="container">
         {% if 'id' not in session %}
-        <div id="landing"></div>
+        <div id="landing">
+            <div id="titlecard">
+                <h1>Rat</h1>
+                <h1>King</h1>
+            </div>
+            <div id="login">
+                <form id="loginForm">
+                    <label for="email-login">Email:</label>
+                    <input type="text" name="email" id="email-login">
+                    <label for="password-login">Password:</label>
+                    <input type="password" name="password" id="password-login">
+                    <button>Log In</button>
+                </form>
+                <button id="register-switch">Register</button>
+            </div>
+            <button id="guestButton">Play as guest</button>
+            <p>Note: When playing as a guest, you may not save progress to or load progress from from the cloud.</p>
+        </div>
         {% endif %}
-        <div id="popout"></div>
-        <div id="tabs">
-            <div id="settingsTab" class="circleButton"></div>
-            <div id="lineageTab" class="circleButton"></div>
-            <div id="royaltytab" class="circleButton"></div>
+        <div id="popout">
+            <div id="settings">
+                <h1>Game Settings</h1>
+                <button id="save">Cloud Save</button>
+                <button id="load">Cloud Load</button>
+                <p>Note: game saves to your browser's local storage automatically every 10 seconds.</p>
+                <form action="/logout">
+                    <button id="logout">Log Out</button>
+                </form>
+            </div>
+            <div id="lineage"></div>
+            <div id="nobility"></div>
+            <div id="tabs">
+                <div id="settingsButton" class="circleButton"></div>
+                <div id="lineageButton" class="circleButton"></div>
+                <div id="nobilityButton" class="circleButton"></div>
+            </div>
         </div>
         <div id="main">
             <div class="pointTracker"><span id="pointValue">0</span> <span id="pointName"></span></div>
@@ -37,9 +66,9 @@
             </div>
         </div>
     </div>
-    <button id="save">Save</button>
-    <button id="load">Load</button>
+    <script src="{{ url_for('static', filename='js/loginregister.js') }}"></script>
     <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/saveload.js') }}"></script>
 </body>
 </html>

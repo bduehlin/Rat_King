@@ -56,7 +56,7 @@ class User:
 
     @classmethod
     def update_save(cls, data):
-        query = "UPDATE users SET save = %(save)s WHERE id = 1"
+        query = "UPDATE users SET save = %(save)s WHERE id = %(id)s"
         return connectToMySQL(DATABASE).query_db( query, data )
 
     @classmethod
@@ -78,19 +78,15 @@ class User:
             is_valid = False
         if len(data['password']) < 8:
             is_valid = False
-            flash('Password must be at least 8 characters!', 'err_password')
         if data['password'] != data['password_confirm']:
-            flash('The password fields do not match.', 'err_password_confirm')
             is_valid = False
         return is_valid
     @staticmethod
     def validate_email(data):
         is_valid = True
         if not EMAIL_REGEX.match(data['email']): 
-            flash("Invalid email address!", 'err_email')
             is_valid = False
         elif not User.check_email_unique(data):
-            flash("Another user has claimed this email address!", 'err_email')
             is_valid = False
         return is_valid
     @staticmethod
@@ -107,9 +103,7 @@ class User:
     def login_validator(data):
         user = User.get_by_email(data['email'])
         if not user:
-            flash("Email not registered to a user!", 'err_login_email')
             return False
         if not bcrypt.check_password_hash(user.password_hash, data['password']):
-            flash("Invalid password.", 'err_login_password')
             return False
-        return user.id
+        return user

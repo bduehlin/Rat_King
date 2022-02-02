@@ -36,6 +36,8 @@ var mods = {
 
 pointName.innerText = data.pointsName
 
+function l(what) {return document.getElementById(what)}
+
 // Declare game functions
 var game = {
 
@@ -102,7 +104,7 @@ var game = {
         document.getElementById('upgrades').innerHTML = ''
         for(var i = 0; i<data.avail.length; i++){
             let upgrade = data.avail[i]
-            document.getElementById('upgrades').insertAdjacentHTML('beforeend', `<div class="upgrade" id="${upgrade}"><div class="hoverbox"><p>${upgrades[upgrade]['name']}</p><p>Cost: ${upgrades[upgrade]['cost']}</p><p>${upgrades[upgrade]['description']}</p></div></div>`)
+            document.getElementById('upgrades').insertAdjacentHTML('beforeend', `<div class="upgrade" id="${upgrade}"><div class="hoverbox"><p class = 'upgradeName'>${upgrades[upgrade]['name']}</p><p class = 'upgradeCost'>Cost: ${upgrades[upgrade]['cost']}</p><p class = 'upgradeDescription'>${upgrades[upgrade]['description']}</p></div></div>`)
         }
     },
 

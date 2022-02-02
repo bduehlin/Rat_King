@@ -15,13 +15,13 @@
 
 /* Landing page */
 
-/* #landing {
+#landing {
     width: 1000px; 
     height: 600px;
     position: absolute;
     z-index: 1000;
-    background-color: black;
-} */
+    background-color: slategray;
+}
 
 
 
@@ -119,13 +119,31 @@
     cursor: pointer;
 }
 
+/* popout pages section */
+
+#popout {
+    display: flex;
+    position: absolute
+}
+
+#settings,
+#lineage,
+#nobility {
+    display: none;
+    flex-direction: column;
+    width: 480px;
+    height: 580px;
+    padding: 10px;
+    z-index: 10;
+    background-color: snow;
+}
 
 /* Tabs section */
 
 #tabs {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    left: 3px;
 }
 
 .circleButton {
@@ -135,6 +153,7 @@
     margin-bottom: 0;
     background-color: red;
     border-radius: 50%;
+    z-index: 5;
 }
 
 .circleButton:hover {
