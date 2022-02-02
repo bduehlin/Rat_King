@@ -10,7 +10,19 @@
     border: 3px solid black;
     margin: auto;
     display: flex;
+    position: relative;
 }
+
+/* Landing page */
+
+/* #landing {
+    width: 1000px; 
+    height: 600px;
+    position: absolute;
+    z-index: 1000;
+    background-color: black;
+} */
+
 
 
 /* Center Section */
@@ -41,11 +53,48 @@
 
 /* Right Section */
 
+
 #buy {
     width: 300px;
     border-left: slategrey 3px solid;
     background-color: slategrey;
 }
+
+/* Upgrades subsection */
+
+#upgrades {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.upgrade {
+    width: 60px;
+    height: 60px;
+    border: solid black 3px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background-color: aqua;
+}
+
+.upgrade:hover {
+    cursor: pointer;
+}
+
+.hoverbox {
+    display: none;
+}
+
+.upgrade:hover .hoverbox{
+    display: block;
+    position: absolute;
+    width: 150px;
+    right: 300px;
+    padding: 5px;
+    background-color: beige;
+    border: black solid 2px;
+}
+/* Buildings subsection */
 
 #buildings {
     display: flex;
@@ -63,11 +112,13 @@
     background-color: forestgreen;
     color: ghostwhite;
     border-left: 0;
+    overflow-y: auto;
 }
 
 .buildingBuy:hover {
     cursor: pointer;
 }
+
 
 /* Tabs section */
 

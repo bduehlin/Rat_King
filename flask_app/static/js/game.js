@@ -17,11 +17,8 @@ var data = {
     bedrooms: 0,
     grandHalls: 0,
 
-    upgrades: [],
-
-    clickBase: 3, 
-    clickMod: 0,
-    percentOnClick: 0,
+    boughtUpgrades: [],
+    avail: [],
 }
 
 var mods = {
@@ -67,6 +64,14 @@ var game = {
             data.points -= game.getNestCost()
             data.nests++
             game.getPopulation()
+            for(var upgrade in upgrades ){
+                if(upgrade > 100 && upgrade < 200 && upgrades[upgrade]['requires']()){
+                    console.log('passed the check!')
+                    console.log(upgrades[upgrade]['requires']())
+                    data.avail.push(upgrade)
+                    game.updateUpgrades()
+                }
+            }
         }
         game.updateDisplay()
     },
@@ -91,6 +96,14 @@ var game = {
         data.popLimit = data.cages * mods.cageValue + data.nests * mods.nestValue
     },
 
+// Upgrades
+
+    updateUpgrades() {
+        for(var i = 0; i<data.avail.length; i++){
+            let upgrade = data.avail[i]
+            document.getElementById('upgrades').insertAdjacentHTML('beforeend', `<div class="upgrade" id="${upgrade}"><div class="hoverbox"><p>${upgrades[upgrade]['name']}</p><p>Cost: ${upgrades[upgrade]['cost']}</p><p>${upgrades[upgrade]['description']}</p></div></div>`)
+        }
+    },
 
 // Core functions
     tick() {
@@ -125,51 +138,60 @@ var game = {
     },
     load(savename = 'save') {
         Object.assign(data, JSON.parse(localStorage.getItem(savename) || '{}'))
+        for(var i = 0; i<data.boughtUpgrades.length; i++){
+            for(var upgrade in upgrades){
+                if(upgrade == data.boughtUpgrades[i]){
+                    upgrades[upgrade]['effect']()
+                    delete(upgrade)
+                }
+            }
+        }
         game.updateClick()
+        game.updateUpgrades()
         game.updateDisplay()
     },
-    clearSave(savename = 'save') {
-        localStorage.setItem(savename, '{}')
-        location.reload()
-        game.saveAlert()
-    },
+    // clearSave(savename = 'save') {
+    //     localStorage.setItem(savename, '{}')
+    //     location.reload()
+    //     game.saveAlert()
+    // },
 }
 
 var upgrades = {
-// click upgrades
     1: {
         name: 'Friend of the small',
-        requires: data.clickCount == 10,
+        requires: () => data.clickCount == 10? true : false,
         cost: 100,
         description: 'Inspire your rats to gather 2 more ' + data.pointsName + ' per click', 
         effect: () => data.clickBase += 2
     },
     2: {
         name: 'Unlikely leader',
-        requires: data.clickCount == 100,
+        requires: () => data.clickCount == 100? true : false,
         cost: 10000,
         description: 'You gain 100% more ' + data.pointsName + ' per click', 
         effect: () => data.clickMod + 1
     },
     3: {
         name: 'Colonel',
-        requires: data.clickPointsTotal == 5000,
+        requires: () => data.clickPointsTotal >= 5000? true : false,
         cost: 100000,
         description: 'You gain 2% of your ' + data.pointsName + ' per second on click', 
         effect: () => data.percentOnClick += 0.02
     },
     4: {
         name: 'General',
-        requires: data.clickPointsTotal == 100000,
+        requires: () => data.clickPointsTotal >= 100000 ? true : false,
         cost: 500000,
         description: 'You gain 100% more ' + data.pointsName + ' per click', 
         effect: () => data.clickMod + 1
     },
 
+
 // building upgrades
     101: {
         name: 'Scrap organization',
-        requires: data.nests == 10,
+        requires: () => data.nests == 10 ? true : false,
         cost: 1000,
         description: 'Your rats create more efficient nests. They hold 3 more rats, each.', 
         effect: () => mods.nestValue += 3
@@ -177,16 +199,15 @@ var upgrades = {
 
     102: {
         name: 'Larger nests',
-        requires: data.nests == 50 && data.upgrades.includes(101),
+        requires: () => data.nests == 50 && data.upgrades.includes(101) ? true : false,
         cost: 1000000,
         description: 'Your rats create larger nests. They twice as many rats, each.', 
         effect: () => mods.nestValue * 2
     },
-
 }
 
 
-
+// game.save()
 game.load()
 game.start()
 

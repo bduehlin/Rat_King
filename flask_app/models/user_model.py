@@ -43,8 +43,20 @@ class User:
         return cls(results[0])
 
     @classmethod
+    def get_by_id(cls, id):
+        query = "SELECT * FROM users WHERE id = %(id)s;"
+        data = {
+            'id' : id
+        }
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        if len(results) != 1:
+            print('id not found in DB')
+            return False
+        return cls(results[0])
+
+    @classmethod
     def update_save(cls, data):
-        query = "UPDATE users SET save = %(save)s WHERE id = %(id)s"
+        query = "UPDATE users SET save = %(save)s WHERE id = 1"
         return connectToMySQL(DATABASE).query_db( query, data )
 
     @classmethod
