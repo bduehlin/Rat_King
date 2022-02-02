@@ -99,6 +99,7 @@ var game = {
 // Upgrades
 
     updateUpgrades() {
+        document.getElementById('upgrades').innerHTML = ''
         for(var i = 0; i<data.avail.length; i++){
             let upgrade = data.avail[i]
             document.getElementById('upgrades').insertAdjacentHTML('beforeend', `<div class="upgrade" id="${upgrade}"><div class="hoverbox"><p>${upgrades[upgrade]['name']}</p><p>Cost: ${upgrades[upgrade]['cost']}</p><p>${upgrades[upgrade]['description']}</p></div></div>`)
