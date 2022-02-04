@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rat King</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quintessential">
 </head>
 <body>
     <div id="container">
@@ -13,56 +14,109 @@
         <div id="landing">
             <div id="titlecard">
                 <h1>Rat</h1>
-                <h1>King</h1>
+                <h1 class="king">  King</h1>
             </div>
             <div id="login">
                 <form id="loginForm">
-                    <label for="email-login">Email:</label>
-                    <input type="text" name="email" id="email-login">
-                    <label for="password-login">Password:</label>
-                    <input type="password" name="password" id="password-login">
+                    <div>
+                        <label for="email-login">Email:</label>
+                        <input type="text" name="email" id="email-login">
+                    </div>
+                    <div>
+                        <label for="password-login">Password:</label>
+                        <input type="password" name="password" id="password-login">
+                    </div>
                     <button>Log In</button>
                 </form>
                 <button id="register-switch">Register</button>
+                <button id="guestButton">Play as guest</button>
+                <p>Note: When playing as a guest, you may not save progress to or load progress from from the cloud.</p>
             </div>
-            <button id="guestButton">Play as guest</button>
-            <p>Note: When playing as a guest, you may not save progress to or load progress from from the cloud.</p>
         </div>
         {% endif %}
         <div id="popout">
             <div id="settings">
-                <h1>Game Settings</h1>
-                <button id="save">Cloud Save</button>
-                <button id="load">Cloud Load</button>
-                <p>Note: game saves to your browser's local storage automatically every 10 seconds.</p>
-                <form action="/logout">
-                    <button id="logout">Log Out</button>
-                </form>
+                <div>
+                    <h1>Game Settings</h1>
+                    <div class="settingsSection">
+                        <button id="save">Cloud Save</button>
+                        <button id="load">Cloud Load</button>
+                        <p>Note: The game saves to your browser's local storage automatically every 10 seconds.</p>
+                    </div>
+                    <div class="settingsSection">
+                        <a id = "export">Export save file</a>
+                        <label for="import">Import save file:</label>
+                        <input type="file" name="import" id="import">
+                        <p>Warning! Importing will overwrite your local save. Make sure to export to back up your progress before importing a save file.</p>
+                    </div>
+                </div>
+                <div class="settingsBottomRow">
+                    <form action="/logout">
+                        <button id="logout">Log Out</button>
+                    </form>
+                    <div>by bduehlin, 2022</div>
+                    <button id="clearSave">Reset local save</button>
+                </div>
             </div>
             <div id="lineage"></div>
             <div id="nobility"></div>
             <div id="tabs">
-                <div id="settingsButton" class="circleButton"></div>
-                <div id="lineageButton" class="circleButton"></div>
-                <div id="nobilityButton" class="circleButton"></div>
+                <div id="settingsButton" class="circleButton">
+                    <p>S</p>
+                </div>
+                <!-- <div id="lineageButton" class="circleButton"></div> -->
+                <!-- <div id="nobilityButton" class="circleButton"></div> -->
             </div>
         </div>
         <div id="main">
-            <div class="pointTracker"><span id="pointValue">0</span> <span id="pointName"></span></div>
-            <div class="ratTracker"><span id="ratTotal">1</span> rats</div>
-            <button class="btnGetPoint" onclick = "game.getPoint()">Encourage</button>
+            <div id="pointsDisplay">
+                <div id="pointTracker"><span id="pointValue">0</span> <span id="pointName"></span></div>
+            </div>
+            <button id="btnGetPoint" onclick = "game.getPoint()">Encourage</button>
+            <div id="ratsDisplay">
+                <div id="ratTracker"><span id="ratTotal">1</span> rats</div>
+                <div id="popTracker">your kingdom can house up to <span id="popTotal">1</span> rats</div>
+                <div id="powerTracker">each rat gathers 1 crumb per second and reproduces occasionally</div>
+            </div>
         </div>
         <div id="buy">
             <div id="upgrades"></div>
             <div id="buildings">
-                <button id="buyNest" class="buildingBuy">
-                    <p>Buy a nest</p>
+                <div id="buyNest" class="buildingBuy">
+                    <div>
+                        <div>Create a nest</div>
+                        <p><span id="nestAmount">0</span> - Holds <span id="nestPop">0</span></p>
+                    </div>
                     <span id="nestCost"></span>
-                </button>
-                <button id="buyCage" class="buildingBuy">
-                    <p>Buy a cage</p>
+                </div>
+                <div id="buyCage" class="buildingBuy">
+                    <div>
+                        <div>Create a cage</div>
+                        <p><span id="cageAmount">0</span> - Holds <span id="cagePop">0</span></p>
+                    </div>
                     <span id="cageCost"></span>
-                </button>
+                </div>
+                <div id="buyHutch" class="buildingBuy">
+                    <div>
+                        <div>Create a hutch</div>
+                        <p><span id="hutchAmount">0</span> - Holds <span id="hutchPop">0</span></p>
+                    </div>
+                    <span id="hutchCost"></span>
+                </div>
+                <div id="buyBedroom" class="buildingBuy">
+                    <div>
+                        <div>Create a bedroom</div>
+                        <p><span id="bedroomAmount">0</span> - Holds <span id="bedroomPop">0</span></p>
+                    </div>
+                    <span id="bedroomCost"></span>
+                </div>
+                <div id="buyGrandHall" class="buildingBuy">
+                    <div>
+                        <div>Create a Grand Hall</div>
+                        <p><span id="grandHallAmount">0</span> - Holds <span id="grandHallPop">0</span></p>
+                    </div>
+                    <span id="grandHallCost"></span>
+                </div>
             </div>
         </div>
     </div>

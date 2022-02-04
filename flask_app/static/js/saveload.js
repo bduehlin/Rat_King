@@ -1,4 +1,6 @@
-document.getElementById('save').onclick = function save() {
+// Cloud Save and load
+
+l('save').onclick = function save() {
     let form = new FormData()
     form.append('save', JSON.stringify(data))
     fetch("/save", { method :'POST', body: form})
@@ -15,7 +17,7 @@ document.getElementById('save').onclick = function save() {
         } )
 }
 
-document.getElementById('load').onclick = function load() {
+l('load').onclick = function load() {
     if(confirm('Warning! This will overwrite your local save. Are you sure you wish to cloud load?')){
         fetch("/load")
             .then( response => response.json())
@@ -35,3 +37,25 @@ document.getElementById('load').onclick = function load() {
             })
         }
 }
+
+// Export and import
+
+l('export').setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(localStorage.getItem('save') || '{}'))
+l('export').setAttribute('download', 'rat_king' + Date.now())
+
+l('import').setAttribute('accept', '.txt')
+l('import').addEventListener('change', (event) => {
+    var input = event.target
+    
+    var reader = new FileReader()
+    reader.onload = function(){
+        localStorage.setItem('save', reader.result)
+        game.load()
+    }
+    reader.readAsText(input.files[0])
+}
+)
+
+
+// Clear local save
+l('clearSave').addEventListener('click', () => game.clearSave())

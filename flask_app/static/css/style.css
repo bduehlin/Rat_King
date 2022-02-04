@@ -4,26 +4,88 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+h1 {
+    font-family: 'Quintessential', serif;
+    user-select: none;
+}
+
 #container {
     width: 1000px; 
     height: 600px;
     border: 3px solid black;
-    margin: auto;
     display: flex;
     position: relative;
 }
 
-/* Landing page */
+button {
+    padding: 5px
+}
 
-#landing {
-    width: 1000px; 
-    height: 600px;
-    position: absolute;
-    z-index: 1000;
-    background-color: slategray;
+p {
+    font-size: 12px;
 }
 
 
+/* Landing page */
+
+#landing {
+    width: 900px; 
+    height: 500px;
+    padding: 50px;
+    position: absolute;
+    z-index: 1000;
+    background-color: slategray;
+    display: flex;
+    justify-content: space-between;
+}
+
+#titlecard {
+    font-size: 60px;
+    color: black;
+}
+
+.king{
+    position: relative;
+    left: 50px;
+    bottom: 50px;
+}
+
+
+#login {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10%;
+    background-color: black;
+    padding: 50px;
+    width: 400px;
+}
+
+#register-form > button{
+    display: block;
+}
+
+#login label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#login input {
+    margin-bottom: 20px;
+    width: 200px;
+    padding: 10px;
+    color: green;
+}
+
+#login button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: royalblue;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
 
 /* Center Section */
 
@@ -31,21 +93,45 @@
     width: 700px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background-color: slategrey;
+    background-color: rgb(31, 97, 64);
 }
 
-.btnGetPoint {
-    border-radius: 10px;
-    border: none;
-    padding: 10px;
+#pointTracker {
+    margin-top: 50px;
+    font-size: 30px;
     color: white;
+    text-shadow: 0 2px black;
+}
+
+#ratsDisplay {
+    display: flex;
+    margin-bottom: 5px;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(190, 190, 190);
+}
+#ratTracker {
+    margin-bottom: 30px;
+    color: rgb(190, 190, 190);
+    font-size: 25px;
+}
+
+#powerTracker {
+    font-size: 14px;
+}
+#btnGetPoint {
+    border-radius: 40%;
+    border: none;
+    padding: 30px;
+    color: white;
+    font-size: 20px;
     background-color: black;
     transition: background-color 1s, color 1s;
 }
 
-.btnGetPoint:hover {
+#btnGetPoint:hover {
     cursor: pointer;
     background-color: white;
     color: black;
@@ -55,9 +141,9 @@
 
 
 #buy {
-    width: 300px;
-    border-left: slategrey 3px solid;
-    background-color: slategrey;
+    width: 295px;
+    padding-left: 5px;
+    background-color: rgb(75, 75, 69);
 }
 
 /* Upgrades subsection */
@@ -65,16 +151,17 @@
 #upgrades {
     display: flex;
     flex-wrap: wrap;
+    overflow-y: auto;
 }
 
 .upgrade {
-    width: 60px;
-    height: 60px;
-    border: solid black 3px;
-    border-radius: 50%;
-    margin-left: 5px;
-    margin-bottom: 5px;
-    background-color: aqua;
+    width: 54px;
+    height: 54px;
+    border-radius: 20%;
+    background-image: linear-gradient(to bottom right, rgb(75, 243, 193), rgb(134, 28, 28));
+    margin-top: 5px;
+    margin-right: 5px;
+    user-select: none;
 }
 
 .upgrade:hover {
@@ -85,6 +172,21 @@
     display: none;
 }
 
+.hoverbox > p {
+    font-size: 15px;
+}
+
+.upgradeName {
+    font-weight: bold;
+    color: purple;
+    margin-bottom: 5px;
+}
+.upgradeCost {
+    color: green;
+}
+.upgradeDescription {
+    font-style: italic;
+}
 .upgrade:hover .hoverbox{
     display: block;
     position: absolute;
@@ -93,26 +195,36 @@
     padding: 5px;
     background-color: beige;
     border: black solid 2px;
+    margin-top: 0;
 }
+
 /* Buildings subsection */
 
 #buildings {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .buildingBuy {
-    height: 60px;
-    padding: 10px;
-    display: flex;
+    height: 50px;
+    flex-shrink: 0;
+    padding: 10px 20px;
+    display: none;
     justify-content: space-between;
     align-items: center;
-    border-radius: 0%;
-    border: slategrey 3px solid;
-    background-color: forestgreen;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background-color: royalblue;
     color: ghostwhite;
     border-left: 0;
-    overflow-y: auto;
+    user-select: none;
+}
+
+#buyNest  {
+    display: flex;
 }
 
 .buildingBuy:hover {
@@ -131,11 +243,25 @@
 #nobility {
     display: none;
     flex-direction: column;
-    width: 480px;
+    justify-content: space-between;
+    width: 445px;
     height: 580px;
     padding: 10px;
     z-index: 10;
-    background-color: snow;
+    background-color: slateblue;
+    color: white;
+}
+
+.settingsSection {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.settingsBottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Tabs section */
@@ -151,11 +277,16 @@
     width: 50px;
     margin: 10px;
     margin-bottom: 0;
-    background-color: red;
+    background-color: wheat;
     border-radius: 50%;
     z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 2s;
 }
 
 .circleButton:hover {
     cursor: pointer;
+    transform: rotate(360deg);
 }

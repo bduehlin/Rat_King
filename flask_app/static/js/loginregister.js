@@ -28,8 +28,7 @@ if(loginForm){
 
     registerButton.addEventListener('click', function(e){
         e.preventDefault()
-        document.getElementById('login').remove()
-        document.getElementById('titlecard').insertAdjacentHTML('afterend', "<form id='register-form'><label for='email-register'>Email:</label><input type='text' name='email' id='email-register'><label for='password-register'>Password:</label><input type='password' name='password' id='password-register'><label for='password-confirm'>Confirm Password:</label><input type='password' name='password_confirm' id='password_confirm'><button>Register</button></form>")
+        document.getElementById('login').innerHTML = ('afterend', "<form id='register-form'><label for='email-register'>Email:</label><input type='text' name='email' id='email-register'><label for='password-register'>Password:</label><input type='password' name='password' id='password-register'><label for='password-confirm'>Confirm Password:</label><input type='password' name='password_confirm' id='password_confirm'><button>Register</button></form>")
         var registerForm = document.getElementById('register-form')
         registerForm.addEventListener('submit', function(e){
             e.preventDefault()
