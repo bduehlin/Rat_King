@@ -291,6 +291,9 @@ var game = {
         setInterval(() => game.save(), /* 10 seconds */ 10e3)
         document.getElementById('buyNest').addEventListener('click', () => game.getNest())
         document.getElementById('buyCage').addEventListener('click', () => game.getCage())
+        document.getElementById('buyHutch').addEventListener('click', () => game.getHutch())
+        document.getElementById('buyBedroom').addEventListener('click', () => game.getBedroom())
+        document.getElementById('buyGrandHall').addEventListener('click', () => game.getGrandHall())
     },
 
     save(savename = 'save') {
